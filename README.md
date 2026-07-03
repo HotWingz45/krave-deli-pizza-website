@@ -29,4 +29,3 @@ Everything is in `index.html`:
 - (646) 964-5256
 - 1399 2nd Ave, New York, NY 10021
 - 4.7★ · 150 Google reviews (update these as they grow)
-- Drive-through pickup and no-contact delivery
