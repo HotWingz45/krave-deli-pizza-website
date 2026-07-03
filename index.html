@@ -131,22 +131,33 @@
   }
 
   /* ── hero ───────────────────────────────── */
-  .hero { position: relative; padding: clamp(48px, 8vw, 96px) clamp(16px, 4vw, 40px) clamp(56px, 7vw, 88px); max-width: 1240px; margin: 0 auto; }
-  .hero__grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .hero {
+    position: relative; color: var(--paper);
+    padding: clamp(60px, 9vw, 120px) clamp(16px, 4vw, 40px) clamp(64px, 8vw, 104px);
+    background: url("images/storefront.jpg") no-repeat center 38% / cover;
+    border-bottom: 3px solid var(--ink);
+  }
+  .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(24,15,8,.93) 0%, rgba(24,15,8,.78) 48%, rgba(24,15,8,.38) 100%); }
+  .hero__grid { position: relative; z-index: 2; max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .hero__eyebrow, .hero .stars { color: var(--mustard); }
+  .hero__eyebrow::before, .hero__proof .dot { background: var(--mustard); }
+  .hero .btn { box-shadow: 4px 4px 0 rgba(0,0,0,.55); }
+  .hero .btn:hover { box-shadow: 7px 7px 0 rgba(0,0,0,.55); }
+  .hero .btn--ghost { color: var(--paper); border-color: var(--paper); }
   .hero__eyebrow {
     font-family: var(--label); font-size: 14px; letter-spacing: .24em; text-transform: uppercase;
-    color: var(--brick); margin: 0 0 18px; display: flex; align-items: center; gap: 14px;
+    margin: 0 0 18px; display: flex; align-items: center; gap: 14px;
   }
-  .hero__eyebrow::before { content: ""; width: 42px; height: 3px; background: var(--brick); }
+  .hero__eyebrow::before { content: ""; width: 42px; height: 3px; }
   .hero h1 {
     font-family: var(--display); font-weight: 400; margin: 0 0 26px;
     font-size: clamp(56px, 9.5vw, 128px); line-height: .96; letter-spacing: .005em;
     text-transform: uppercase;
   }
   .hero h1 .l { display: block; }
-  .hero h1 .hl { color: var(--brick); }
+  .hero h1 .hl { color: var(--mustard); }
   .hero h1 .outline {
-    color: transparent; -webkit-text-stroke: 2.5px var(--ink);
+    color: transparent; -webkit-text-stroke: 2.5px var(--paper);
     text-shadow: none;
   }
   .hero__sub { max-width: 52ch; font-size: 19px; margin: 0 0 34px; }
@@ -258,11 +269,6 @@
 
   .board__photo { display: block; width: 100%; height: 190px; object-fit: cover; border-bottom: 3px solid var(--ink); }
 
-  .hero__media { position: relative; justify-self: center; max-width: 470px; width: 100%; margin-bottom: 34px; }
-  .hero__media .snap { transform: rotate(1.4deg); margin: 0; }
-  .hero__media .ticket { position: absolute; bottom: -44px; left: -28px; max-width: 285px; transform: rotate(-2.4deg); font-size: 12.5px; padding: 18px 18px 14px; }
-  .hero__media .ticket__head { padding-bottom: 10px; margin-bottom: 10px; }
-  .hero__media .ticket__head .num { font-size: 44px; }
 
   /* ── footer ─────────────────────────────── */
   .ft { background: var(--ink); color: var(--paper); padding: 40px clamp(16px, 4vw, 40px) 120px; }
@@ -308,8 +314,8 @@
   @media (max-width: 860px) {
     .hd nav { display: none; }
     .hero__grid, .visit__grid { grid-template-columns: 1fr; }
-    .hero__media { justify-self: start; max-width: 520px; margin-bottom: 0; }
-    .hero__media .ticket { position: static; transform: rotate(1.2deg); margin: 22px auto 0; max-width: 340px; }
+    .ticket { justify-self: start; margin-top: 8px; }
+    .hero::before { background: linear-gradient(180deg, rgba(24,15,8,.9) 0%, rgba(24,15,8,.78) 100%); }
   }
   @media (max-width: 720px) {
     .stickybar { display: flex; }
@@ -369,26 +375,21 @@
         <span><span class="dot"></span> $10&ndash;20 per person</span>
       </p>
     </div>
-    <div class="hero__media rv">
-      <figure class="snap" style="padding-bottom:12px">
-        <img src="images/storefront.jpg" alt="Krave Cafe &amp; Deli storefront at night on Second Avenue, with the glowing SMOOTHIES neon sign in the window">
-      </figure>
-      <aside class="ticket" aria-label="Sample order ticket">
-        <div class="ticket__head">
-          <div class="now">Now serving</div>
-          <div class="num">#247</div>
-          <div class="sub">KRAVE DELI &amp; PIZZA &#183; NYC 10021</div>
-        </div>
-        <div class="ticket__row"><span>1&#215; BEC ON A BAGEL</span><span>5.50</span></div>
-        <div class="ticket__row"><span>1&#215; PEPPERONI SLICE</span><span>4.50</span></div>
-        <div class="ticket__row"><span>1&#215; MANGO TANGO</span><span>7.50</span></div>
-        <div class="ticket__total"><span>ALWAYS OPEN</span><span>24/7</span></div>
-        <div class="ticket__foot">
-          <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span><br>
-          &ldquo;Food always 10/10&rdquo;<br>&mdash; Google review
-        </div>
-      </aside>
-    </div>
+    <aside class="ticket rv" aria-label="Sample order ticket">
+      <div class="ticket__head">
+        <div class="now">Now serving</div>
+        <div class="num">#247</div>
+        <div class="sub">KRAVE DELI &amp; PIZZA &#183; NYC 10021</div>
+      </div>
+      <div class="ticket__row"><span>1&#215; BEC ON A BAGEL</span><span>5.50</span></div>
+      <div class="ticket__row"><span>1&#215; PEPPERONI SLICE</span><span>4.50</span></div>
+      <div class="ticket__row"><span>1&#215; MANGO TANGO</span><span>7.50</span></div>
+      <div class="ticket__total"><span>ALWAYS OPEN</span><span>24/7</span></div>
+      <div class="ticket__foot">
+        <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span><br>
+        &ldquo;Food always 10/10&rdquo;<br>&mdash; Google review
+      </div>
+    </aside>
   </div>
 </section>
 
