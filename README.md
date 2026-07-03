@@ -18,7 +18,7 @@ Upload `index.html` to any static host and you're live:
 
 Everything is in `index.html`:
 
-- **Menu items & prices** — search for `The Board`; each item is a `<li>` with a name, dotted leader, and price. Deli and Fresh Bar prices match the official café menu; pizza prices are still estimates (Krave Pizza's menu wasn't available).
+- **Menu items & prices** — search for `The Board`; each item is a `<li>` with a name, dotted leader, and price. All prices match the official café and pizza menus.
 - **Phone number** — search for `6469645256` (appears in `tel:` links and the schema block).
 - **Address / map links** — search for `1399`.
 - **Colors** — the palette is defined once in the `:root` block (`--brick`, `--kraft`, `--mustard`, etc.).
