@@ -248,6 +248,22 @@
   .pulse { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #1F6B3B; margin-right: 8px; animation: pulse 1.6s ease infinite; }
   @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
 
+  .snap { background: #FCF7E9; border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); padding: 12px 12px 14px; margin: 0 0 38px; transform: rotate(-1.4deg); position: relative; }
+  .snap::before { content: ""; position: absolute; top: -14px; left: 50%; transform: translateX(-50%) rotate(2deg); width: 110px; height: 26px; background: rgba(233,169,59,.75); border: 1px solid rgba(36,25,15,.25); z-index: 1; }
+  .snap img { display: block; width: 100%; height: auto; border: 1px solid rgba(36,25,15,.3); }
+  .snap figcaption { font-family: var(--mono); font-size: 12.5px; letter-spacing: .04em; text-align: center; padding-top: 11px; }
+  .snap--wide { transform: rotate(-.5deg); max-width: 980px; margin: clamp(32px, 5vw, 52px) auto 0; }
+  .snap--wide::before { transform: translateX(-50%) rotate(-1.5deg); }
+  .snap--wide a { display: block; }
+
+  .board__photo { display: block; width: 100%; height: 190px; object-fit: cover; border-bottom: 3px solid var(--ink); }
+
+  .hero__media { position: relative; justify-self: center; max-width: 470px; width: 100%; margin-bottom: 34px; }
+  .hero__media .snap { transform: rotate(1.4deg); margin: 0; }
+  .hero__media .ticket { position: absolute; bottom: -44px; left: -28px; max-width: 285px; transform: rotate(-2.4deg); font-size: 12.5px; padding: 18px 18px 14px; }
+  .hero__media .ticket__head { padding-bottom: 10px; margin-bottom: 10px; }
+  .hero__media .ticket__head .num { font-size: 44px; }
+
   /* ── footer ─────────────────────────────── */
   .ft { background: var(--ink); color: var(--paper); padding: 40px clamp(16px, 4vw, 40px) 120px; }
   .ft__inner { max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 20px; align-items: baseline; justify-content: space-between; }
@@ -292,7 +308,8 @@
   @media (max-width: 860px) {
     .hd nav { display: none; }
     .hero__grid, .visit__grid { grid-template-columns: 1fr; }
-    .ticket { justify-self: start; margin-top: 8px; }
+    .hero__media { justify-self: start; max-width: 520px; margin-bottom: 0; }
+    .hero__media .ticket { position: static; transform: rotate(1.2deg); margin: 22px auto 0; max-width: 340px; }
   }
   @media (max-width: 720px) {
     .stickybar { display: flex; }
@@ -352,21 +369,26 @@
         <span><span class="dot"></span> $10&ndash;20 per person</span>
       </p>
     </div>
-    <aside class="ticket rv" aria-label="Sample order ticket">
-      <div class="ticket__head">
-        <div class="now">Now serving</div>
-        <div class="num">#247</div>
-        <div class="sub">KRAVE DELI &amp; PIZZA &#183; NYC 10021</div>
-      </div>
-      <div class="ticket__row"><span>1&#215; BACON EGG &amp; CHEESE</span><span>6.50</span></div>
-      <div class="ticket__row"><span>1&#215; PEPPERONI SLICE</span><span>4.50</span></div>
-      <div class="ticket__row"><span>1&#215; STRAWBERRY-MANGO SMOOTHIE</span><span>8.95</span></div>
-      <div class="ticket__total"><span>ALWAYS OPEN</span><span>24/7</span></div>
-      <div class="ticket__foot">
-        <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span><br>
-        &ldquo;Food always 10/10&rdquo;<br>&mdash; Google review
-      </div>
-    </aside>
+    <div class="hero__media rv">
+      <figure class="snap" style="padding-bottom:12px">
+        <img src="images/storefront.jpg" alt="Krave Cafe &amp; Deli storefront at night on Second Avenue, with the glowing SMOOTHIES neon sign in the window">
+      </figure>
+      <aside class="ticket" aria-label="Sample order ticket">
+        <div class="ticket__head">
+          <div class="now">Now serving</div>
+          <div class="num">#247</div>
+          <div class="sub">KRAVE DELI &amp; PIZZA &#183; NYC 10021</div>
+        </div>
+        <div class="ticket__row"><span>1&#215; BEC ON A BAGEL</span><span>5.50</span></div>
+        <div class="ticket__row"><span>1&#215; PEPPERONI SLICE</span><span>4.50</span></div>
+        <div class="ticket__row"><span>1&#215; MANGO TANGO</span><span>7.50</span></div>
+        <div class="ticket__total"><span>ALWAYS OPEN</span><span>24/7</span></div>
+        <div class="ticket__foot">
+          <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span><br>
+          &ldquo;Food always 10/10&rdquo;<br>&mdash; Google review
+        </div>
+      </aside>
+    </div>
   </div>
 </section>
 
@@ -385,10 +407,11 @@
     <div class="boards">
       <article class="board rv">
         <div class="board__head"><h3>The Deli</h3><span class="board__tag">All day</span></div>
+        <img class="board__photo" src="images/bacon-egg-cheese.jpg" loading="lazy" alt="Bacon egg and cheese on an everything bagel with a coffee from Krave">
         <ul>
           <li>
-            <div class="mi"><span class="mi__name">Bacon Egg &amp; Cheese<span class="flag">Fan favorite</span></span><span class="mi__dots"></span><span class="mi__price">$6.50</span></div>
-            <p class="mi__desc">The New York standard, done right &mdash; on a roll, griddled to order.</p>
+            <div class="mi"><span class="mi__name">Bacon Egg &amp; Cheese<span class="flag">Fan favorite</span></span><span class="mi__dots"></span><span class="mi__price">$5.50</span></div>
+            <p class="mi__desc">The New York standard, done right &mdash; on a roll or bagel, griddled to order.</p>
           </li>
           <li>
             <div class="mi"><span class="mi__name">Breakfast Platter</span><span class="mi__dots"></span><span class="mi__price">$9.75</span></div>
@@ -414,6 +437,7 @@
       </article>
       <article class="board board--pizza rv">
         <div class="board__head"><h3>The Pizza</h3><span class="board__tag">Hot &amp; fresh</span></div>
+        <img class="board__photo" src="images/pizza-shop.jpg" loading="lazy" alt="Krave Pizza storefront next door, with a glowing PIZZA neon sign in the window" style="object-position: 50% 32%">
         <ul>
           <li>
             <div class="mi"><span class="mi__name">Classic Cheese Slice</span><span class="mi__dots"></span><span class="mi__price">$3.50</span></div>
@@ -439,18 +463,19 @@
       </article>
       <article class="board board--fresh rv">
         <div class="board__head"><h3>Fresh Bar</h3><span class="board__tag">Juiced to order</span></div>
+        <img class="board__photo" src="images/platters.jpg" loading="lazy" alt="Fresh salmon platters with yellow rice and salad beside the salad bar at Krave">
         <ul>
           <li>
-            <div class="mi"><span class="mi__name">Smoothies<span class="flag flag--gold">As seen in the window</span></span><span class="mi__dots"></span><span class="mi__price">$8.95</span></div>
-            <p class="mi__desc">Real fruit, blended fresh &mdash; strawberry-banana, mango, mixed berry &amp; more.</p>
+            <div class="mi"><span class="mi__name">Smoothies<span class="flag flag--gold">As seen in the window</span></span><span class="mi__dots"></span><span class="mi__price">from $7.50</span></div>
+            <p class="mi__desc">Real fruit, blended fresh &mdash; Very Berry, Mango Tango, Green Machine &amp; more.</p>
           </li>
           <li>
-            <div class="mi"><span class="mi__name">A&#231;a&#237; Bowls</span><span class="mi__dots"></span><span class="mi__price">$12.95</span></div>
-            <p class="mi__desc">Topped with granola, fresh fruit, honey, and coconut.</p>
+            <div class="mi"><span class="mi__name">A&#231;a&#237; Bowls</span><span class="mi__dots"></span><span class="mi__price">from $8.95</span></div>
+            <p class="mi__desc">Peanut Butter Bliss, Tropical, Nutella &mdash; topped with granola &amp; fresh fruit.</p>
           </li>
           <li>
-            <div class="mi"><span class="mi__name">Fresh-Squeezed Juice</span><span class="mi__dots"></span><span class="mi__price">$8.50</span></div>
-            <p class="mi__desc">Orange, green, ginger shots &mdash; pressed while you watch.</p>
+            <div class="mi"><span class="mi__name">Fresh-Squeezed Juice</span><span class="mi__dots"></span><span class="mi__price">from $7.50</span></div>
+            <p class="mi__desc">Green Juice, Citrus Bliss, Immunity &mdash; pressed while you watch.</p>
           </li>
           <li>
             <div class="mi"><span class="mi__name">The Sweet Case</span><span class="mi__dots"></span><span class="mi__price">from $4.50</span></div>
@@ -459,6 +484,12 @@
         </ul>
       </article>
     </div>
+    <figure class="snap snap--wide rv">
+      <a href="images/menu.jpg" target="_blank" rel="noopener">
+        <img src="images/menu.jpg" loading="lazy" alt="The full Krave menu board: a&#231;a&#237; bowls, smoothies, fresh squeezed juice bar, coffee, breakfast, omelettes, wraps, and Boar's Head cold cut sandwiches">
+      </a>
+      <figcaption>The actual menu &mdash; tap to zoom. A&#231;a&#237; bowls &#183; smoothies &#183; juice bar &#183; coffee &#183; breakfast &#183; Boar&rsquo;s Head cold cuts</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -545,12 +576,18 @@
           <a class="btn btn--mustard" href="tel:+16469645256">Call the counter</a>
         </div>
       </div>
-      <div class="infocard rv">
+      <div>
+        <figure class="snap rv">
+          <img src="images/interior.jpg" loading="lazy" alt="Inside Krave Deli &mdash; wood-slat ceilings, stocked shelves, and the fresh bakery table">
+          <figcaption>Inside: clean, stocked, always on.</figcaption>
+        </figure>
+        <div class="infocard rv">
         <div><span class="k">Hours</span><span class="v"><span class="pulse" aria-hidden="true"></span><span class="open">Open now</span> &#183; 24/7/365</span></div>
         <div><span class="k">Address</span><span class="v">1399 2nd Ave<br>New York, NY 10021</span></div>
         <div><span class="k">Phone</span><span class="v"><a href="tel:+16469645256">(646) 964-5256</a></span></div>
         <div><span class="k">Pickup</span><span class="v">Drive-through window</span></div>
         <div><span class="k">Delivery</span><span class="v">No-contact available</span></div>
+        </div>
       </div>
     </div>
   </div>
